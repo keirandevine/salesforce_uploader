@@ -6,6 +6,7 @@ import * as path from 'path';
 export class PdfService {
   private pdfPaths: string[] = [];
 
+  // Method detects PDFs in the C:/test folder and returns their file paths as a list
   async getPdfs(): Promise<string[]> {
     const folderPath = "C:/test";
 
@@ -22,6 +23,7 @@ export class PdfService {
     }
   }
 
+  // Method returns the array of string objects this.pdfPaths
   getPdfPaths(): string[] {
     return this.pdfPaths;
   }

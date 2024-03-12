@@ -4,8 +4,10 @@ import * as path from 'path';
 
 @Injectable()
 export class LoggerService {
-  private folderPath = 'C:\\test'; // Specify your full log folder path here
+  // Specify your full log folder path here
+  private folderPath = 'C:\\test'; 
 
+  // Method to log a message to a file
   logToFile(message: string): void {
     const logFolderPath = path.join(this.folderPath, 'logs');
     const logFilePath = path.join(logFolderPath, 'logfile.txt');

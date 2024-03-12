@@ -14,6 +14,8 @@ export class SalesforceService {
     private pdfService: PdfService,
     private loggerService: LoggerService) { }
 
+  
+  // Method to establish a connection with Salesforce
   async establishConnection() {
 
     this.conn = new jsforce.Connection({
@@ -21,7 +23,7 @@ export class SalesforceService {
     });
   }
 
-
+  // Method to login to Salesforce
   async login() {
     if (!this.conn) {
       this.loggerService.logToFile('Connection not established');
@@ -49,7 +51,7 @@ export class SalesforceService {
 
 
 
-
+  // Method to upload PDFs to Salesforce
   async uploadPdfs() {
     try {
       await this.pdfService.getPdfs();

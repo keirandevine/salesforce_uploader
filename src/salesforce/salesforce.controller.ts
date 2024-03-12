@@ -9,7 +9,8 @@ export class SalesforceController {
     private salesforceService: SalesforceService,
     private loggerService: LoggerService // Inject LoggerService
   ) {}
-
+  
+  // Endpoint to establish a connection with Salesforce
   @Post('connect')
   async createConnectionToSalesforce() {
     try {
@@ -22,7 +23,7 @@ export class SalesforceController {
     }
   }
 
-
+  // Endpoint to login to Salesforce
   @Post('login')
   async loginToSalesforce(@Body() credentials: { username: string, password: string }) {
     try {
@@ -36,6 +37,7 @@ export class SalesforceController {
     }
   }
 
+  // Endpoint to upload PDFs to Salesforce
   @Post('upload')
   async uploadPdfsToSalesforce() {
     try {
