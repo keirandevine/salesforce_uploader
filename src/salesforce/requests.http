@@ -1,0 +1,11 @@
+###Establist connection with Salesforce
+POST http://localhost:3000/salesforce/connect
+
+
+###Login to Salesforce
+POST http://localhost:3000/salesforce/login
+Content-Type: application/json
+
+
+###Upload Pdfs To Salesforce
+POST http://localhost:3000/salesforce/upload

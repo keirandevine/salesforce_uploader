@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Bootstrap Uploader</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="text-align:center; margin-bottom: 30px; margin-top: 20px; font: bold 40px Arial, sans-serif;">Salesforce
+      PDF Uploader
+    </h1>
+
+    <!-- Center-aligned button group -->
+    <div class="d-flex justify-content-center">
+      <button style="width: 200px" class="btn btn-primary mr-2" id="checkForPdfsBtn">Check C:/test For PDFs</button>
+      <button style="width: 200px" class="btn btn-secondary mr-2" id="connectToSalesforceBtn">Connect To
+        Salesforce</button>
+      <button style="width: 200px" class="btn btn-secondary" id="loginToSalesforceBtn">Login To Salesforce</button>
+      <button style="width: 200px; margin-left: 9px" class="btn btn-success" id="uploadPdfsBtn">Upload Pdfs To
+        Salesforce</button>
+    </div>
+
+    <!-- Response display -->
+    <div id="responseContainer" class="mt-5 text-center"></div>
+  </div>
+
+  <!-- Include JavaScript -->
+  <script>
+    document.getElementById('checkForPdfsBtn').addEventListener('click', function () {
+      fetch('/pdf/find')
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // If response is successful, parse JSON data
+          } else {
+            throw new Error('Error occurred during PDF check'); // If response is not successful, throw an error
+          }
+        })
+        .then(data => {
+          if (data.success) {
+            // Format file paths
+            const formattedMessage = 'Files found:\n' + data.data.join('\n');
+            displayResponse({ success: true, message: formattedMessage });
+          } else {
+            displayResponse({ success: false, error: data.error });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayResponse({ success: false, error: error.message }); // Display error message
+        });
+    });
+
+    document.getElementById('connectToSalesforceBtn').addEventListener('click', function () {
+      fetch('/salesforce/connect', {
+        method: 'POST'
+      })
+        .then(response => response.json())
+        .then(data => {
+          displayResponse(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayResponse({ success: false, error: error.message }); // Display error message
+        });
+    });
+
+    document.getElementById('loginToSalesforceBtn').addEventListener('click', function () {
+      fetch('/salesforce/login', {
+        method: 'POST'
+      })
+        .then(response => response.json())
+        .then(data => {
+          displayResponse(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayResponse({ success: false, error: error.message })
+        })
+    })
+
+    document.getElementById('uploadPdfsBtn').addEventListener('click', function () {
+      fetch('/pdf/find')
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // If response is successful, return JSON data
+          } else {
+            throw new Error('Error occurred during PDF check'); // If response is not successful, throw an error
+          }
+        })
+        .then(data => {
+          const pdfPaths = data.data; // Assuming the array of PDF paths is available as 'data' property
+          // Now, make a POST request to /salesforce/upload endpoint with pdfPaths array
+          return fetch('/salesforce/upload', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pdfPaths })
+          });
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // If response is successful, return JSON data
+          } else {
+            throw new Error('Failed to upload PDFs to Salesforce'); // If response is not successful, throw an error
+          }
+        })
+        .then(data => {
+          displayResponse(data); // Display response message
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayResponse({ success: false, error: error.message }); // Display error message
+        });
+    });
+
+    function displayResponse(responseData) {
+      const responseContainer = document.getElementById('responseContainer');
+      let message = '';
+
+      if (responseData.success) {
+        message = responseData.message;
+      } else {
+        message = responseData.error || 'An unknown error occurred.';
+      }
+
+      responseContainer.innerText = message;
+    }
+
+
+  </script>
+</body>
+
+</html>
