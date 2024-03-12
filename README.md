@@ -1,73 +1,74 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Project Title
+Salesforce PDF Uploader
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Description
+When this program runs, a HTML index page is served at localhost:3000. The webpage presents 4 buttons:
+1) Check C:/test for PDFs
+2) Connect To SalesForce
+3) Login To Salesforce
+4) Upload PDFs To Salesforce
+When any button gets clicked the server response gets displayed on screen. 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Getting Started
+Dependencies
+@nestjs/common
+@nestjs/core
+@nestjs/platform-express
+dotenv
+express
+jsforce
+reflect-metadata
+rxjs
 
-## Installation
+Installing
+To use the Salesforce PDF uploader follow these steps: 
+1) Download the project files from the Github repository
+2) Navigate to the project root folder in the CLI
+3) Run the command npm run start:dev to start the nest app running at localhost:3000
+4) Navigate to localhost:3000 in the web browser
+5) Click on the buttons to detect pdfs, establish a connection with Salesforce, login to Salesforce, and upload PDFs to Salesforce
 
-```bash
-$ npm install
-```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+Testing Program
+1) Prepare a Salesforce account with permission granted to upload files
+2) Copy some PDF files into the C:/test/ folder of your local machine
+3) Enter a Salesforce username, password and login url as environment variables
+4) In the CLI, navigate to the project root folder, run the command npm run start:dev, click the buttons to detect pdfs, establish a connection with Salesforce, login to Salesforce, and upload PDFs to Salesforce. 
+5) Login to your Salesforce account and navigate to the Files section to verify that the upload was successful
+6) Test edge cases such as uploading large files or uploading files in bulk to ensure that the application handles them successfully
 
-# watch mode
-$ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+Troubleshooting 
+If you run into any problems when using the Salesforce PDF Uploader, consider these troubleshooting tips:
+1) Double check the Salesforce username, password, and login url configured as environmental variables
+2) Ensure a stable internet connection and verify that there are no firewall or network restrictions blocking the connection
+3) Ensure that your user account has the necessary permissions to read files from the folder C:/test/
+4) Check C:/test/logs/logfile.txt or debug console for error messages
 
-## Test
+If you continue to experience problems, consider seeking assistance from the project contributors or consulting relevant documentation for further guidance.
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
 
-## Support
+Authors
+Contributors names and contact info
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Keiran Devine - teacherkeiran@gmail.com
+Mahmoud Diab - mahmoud@weareprodigy.com
+Cian Connolly - Cian.Connolly@weareprodigy.com
 
-## Stay in touch
+Version History 
+0.1 - Initial Release
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Acknowledgements
+This software could not have been built without the patience and guidance of both Mahmoud Diab and Cian Connolly. The following resources were also invaluable:
+https://developer.salesforce.com/docs/atlas.en-us.uiapi.meta/uiapi/ui_api_features_records_content_document.htm
+https://github.com/ccoenraets/forcejs/blob/master/README.md
+https://docs.nestjs.com/
+https://developer.salesforce.com/docs/atlas.en-us.uiapi.meta/uiapi/ui_api_features_records_content_document.htm
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+
